@@ -32,3 +32,17 @@ router.get("/",async (req,res)=>{
 });
 
 
+/* Create new task */
+router.post("/",async (req,res)=>{
+    const task = (req.body as Task);
+    if(!task.description?.trim()) {
+        res.sendStatus(400);
+        return;
+    }
+    const result = await pool.query("INSERT INTO task (description,status) VALUES (?,DEFAULT)",[task.description]);
+
+    task.id = result.insertId;
+    task.status = "NOT_COMPLETED";
+    res.status(201).json(task);
+});
+
