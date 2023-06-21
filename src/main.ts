@@ -1,7 +1,17 @@
 import express from "express";
+import mysql from "promise-mysql"
 
 const app = express();
 const router = express.Router();
+
+const pool = await mysql.createPool({
+    host: "localhost",
+    port: 3306,
+    database: "dep10_simple_task_app",
+    user: "root",
+    password: "2273349@P",
+    connectionLimit: 5
+})
 
 /* Get all tasks */
 router.get("/",(req,res)=>{
