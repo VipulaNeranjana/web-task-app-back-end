@@ -46,3 +46,9 @@ router.post("/",async (req,res)=>{
     res.status(201).json(task);
 });
 
+/* Delete an existing task */
+router.delete("/:taskId", async (req,res)=>{
+    const result = await pool.query("DELETE FROM task WHERE id=?",[req.params.taskId]);
+    res.sendStatus(result.affectedRows ? 204:404);
+});
+
