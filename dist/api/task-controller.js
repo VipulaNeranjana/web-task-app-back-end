@@ -35,7 +35,6 @@ function initPool() {
 }
 /* Get all tasks */
 exports.router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("sssssssssssssss");
     const tasks = yield pool.query("SELECT * FROM task");
     res.json(tasks);
 }));
